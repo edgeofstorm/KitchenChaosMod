@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class ClearCounter : MonoBehaviour
 {
+    [SerializeField] private KithcenObjectSO kithcenObjectSO;
+    [SerializeField] private Transform counterTopPoint;
+
     public void interact()
     {
-        Debug.Log("interact");
+        Transform kitchenObjectTransform = Instantiate(kithcenObjectSO.prefab, counterTopPoint);
+        kitchenObjectTransform.localPosition = Vector3.zero;
     }
 }

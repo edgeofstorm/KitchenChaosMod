@@ -59,10 +59,10 @@ public class Player : MonoBehaviour
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs e)
     {
+        Debug.Log("interact from player");
         if (selectedCounter != null)
         {
             selectedCounter.interact();
-
         }
     }
 
@@ -87,7 +87,6 @@ public class Player : MonoBehaviour
         {
             if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter))
             {
-                clearCounter.interact();
                 if (selectedCounter != clearCounter)
                 {
                     selectedCounter = clearCounter;
