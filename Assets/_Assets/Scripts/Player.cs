@@ -20,16 +20,21 @@ public class Player : MonoBehaviour
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
+        float playerSize = 0.7f;
+        bool canMove = !Physics.Raycast(origin: transform.position, direction: moveDir, maxDistance: playerSize);
+
         isWalking = moveDir != new Vector3(0, 0, 0);
 
         moveDir = moveDir * Time.deltaTime * moveSpeed;
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
             moveDir *= runMultiplier;
-
         }
 
-        transform.position += moveDir;
+        if (canMove)
+        {
+            transform.position += moveDir;
+        }
 
 
         if (Input.GetKeyDown(KeyCode.Space))
