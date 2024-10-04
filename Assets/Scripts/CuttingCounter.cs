@@ -17,11 +17,6 @@ public class CuttingCounter : BaseCounter
     private int cuttingProgress;
 
 
-    private void Start()
-    {
-        progressBarUI.GetComponent<Canvas>().enabled = false;
-    }
-
     public override void Interact(Player player)
     {
         if (!HasKitchenObject())
@@ -35,7 +30,6 @@ public class CuttingCounter : BaseCounter
                     // Player carrying something that can be Cut
                     player.GetKitchenObject().SetKitchenObjectParent(this);
                     this.cuttingProgress = 0;
-                    progressBarUI.GetComponent<Canvas>().enabled = true;
 
                 }
             }
@@ -87,7 +81,6 @@ public class CuttingCounter : BaseCounter
                 {
                     progressNormalized = (float)this.cuttingProgress / cuttingRecipeSO.cuttingProgressMax
                 });
-                progressBarUI.GetComponent<Canvas>().enabled = false;
 
             }
 
