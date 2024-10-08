@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class PlateIconsSingleUI : MonoBehaviour
-{
-    [SerializeField] private UnityEngine.UI.Image image;
+public class PlateIconsSingleUI : MonoBehaviour {
 
 
-    public void SetKitchenObjectSO(KitchenObjectSO kitchenObjectSO)
-    {
+    [SerializeField] private Image image;
+
+
+    public void SetKitchenObjectSO(KitchenObjectSO kitchenObjectSO) {
         image.sprite = kitchenObjectSO.sprite;
     }
+
 }

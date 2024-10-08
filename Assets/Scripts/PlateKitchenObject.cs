@@ -3,48 +3,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlateKitchenObject : KitchenObject
-{
-    public event EventHandler<OnIngredientAddedEventArgs> OnIngredientAdded;
+public class PlateKitchenObject : KitchenObject {
 
-    public class OnIngredientAddedEventArgs : EventArgs
-    {
+
+    public event EventHandler<OnIngredientAddedEventArgs> OnIngredientAdded;
+    public class OnIngredientAddedEventArgs : EventArgs {
         public KitchenObjectSO kitchenObjectSO;
     }
 
-    public event EventHandler OnPlateCleared;
 
     [SerializeField] private List<KitchenObjectSO> validKitchenObjectSOList;
+
+
     private List<KitchenObjectSO> kitchenObjectSOList;
 
-    private void Awake()
-    {
+
+    private void Awake() {
         kitchenObjectSOList = new List<KitchenObjectSO>();
     }
 
-    public void AddIngredient(KitchenObjectSO kitchenObjectSO)
-    {
-        if (validKitchenObjectSOList.Contains(kitchenObjectSO))
-        {
-
+    public bool TryAddIngredient(KitchenObjectSO kitchenObjectSO) {
+        if (!validKitchenObjectSOList.Contains(kitchenObjectSO)) {
+            // Not a valid ingredient
+            return false;
+        }
+        if (kitchenObjectSOList.Contains(kitchenObjectSO)) {
+            // Already has this type
+            return false;
+        } else {
             kitchenObjectSOList.Add(kitchenObjectSO);
-            OnIngredientAdded?.Invoke(this, new OnIngredientAddedEventArgs
-            {
+
+            OnIngredientAdded?.Invoke(this, new OnIngredientAddedEventArgs {
                 kitchenObjectSO = kitchenObjectSO
             });
+
+            return true;
         }
     }
 
-
-    public void RemoveAllIngredient()
-    {
-
-        kitchenObjectSOList.Clear();
-        OnPlateCleared?.Invoke(this, EventArgs.Empty);
-    }
-
-    public List<KitchenObjectSO> GetKitchenObjectSOList()
-    {
+    public List<KitchenObjectSO> GetKitchenObjectSOList() {
         return kitchenObjectSOList;
     }
+
 }
