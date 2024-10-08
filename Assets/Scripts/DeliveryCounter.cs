@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrashCounter : BaseCounter
+public class DeliveryCounter : BaseCounter
 {
     public override void Interact(Player player)
     {
@@ -10,13 +10,8 @@ public class TrashCounter : BaseCounter
         {
             if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject))
             {
-
-                plateKitchenObject.RemoveAllIngredient();
+                player.GetKitchenObject().DestroySelf();
             }
-        }
-        else
-        {
-            player.GetKitchenObject().DestroySelf();
         }
     }
 }
